@@ -62,7 +62,7 @@ function App() {
               className="h-24 w-24 md:h-32 md:w-32"
             />
             <h1 className="text-6xl font-black [letter-spacing:-0.08em] text-white md:text-7xl">
-              <span className="text-gray-300">TANSTACK</span>{" "}
+              <span className="text-gray-300">ここ</span>{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 START
               </span>
