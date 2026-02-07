@@ -1,12 +1,14 @@
+import { createClient } from "@libsql/client/web";
 import { drizzle } from "drizzle-orm/libsql";
 
 export const db = (options: { url: string; databaseAuthToken: string }) => {
-  return drizzle({
-    connection: {
-      url: options.url,
-      authToken: options.databaseAuthToken,
-    },
+  const client = createClient({
+    url: options.url,
+    authToken: options.databaseAuthToken,
   });
+
+  return drizzle({ client });
 };
 
 export type DbType = ReturnType<typeof db>;
+

@@ -1,17 +1,20 @@
-import type { BetterAuthOptions } from "better-auth";
+import type { BetterAuthOptions, BetterAuthPlugin } from "better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 import type { DbType } from "@acme/db/client";
 import * as schema from "@acme/db/schema";
 
-export function initAuth(options: {
+export function initAuth<
+  TExtraPlugins extends BetterAuthPlugin[] = [],
+>(options: {
   db: DbType;
   authUrl: string;
   secret: string | undefined;
   trustedUrl: string;
   googleClientId: string;
   googleClientSecret: string;
+  extraPlugins?: TExtraPlugins;
 }) {
   const config = {
     database: drizzleAdapter(options.db, {
@@ -21,6 +24,7 @@ export function initAuth(options: {
     baseURL: options.authUrl,
     secret: options.secret,
     trustedOrigins: [options.trustedUrl],
+    plugins: [...(options.extraPlugins ?? [])],
     advanced: {
       useSecureCookies: true,
     },
