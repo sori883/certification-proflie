@@ -14,7 +14,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "cross-fetch": path.resolve(__dirname, "src/lib/cross-fetch-shim.ts"),
+      "cross-fetch": path.resolve(__dirname, "src/patch/cross-fetch-shim.ts"),
     },
   },
   plugins: [
