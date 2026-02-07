@@ -7,3 +7,9 @@ node_modules/
 .serena/cache
 *.local.json
 .env
+.cache
+.turbo
+
+# tanstack
+.tanstack
+
