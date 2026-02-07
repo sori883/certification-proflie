@@ -7,4 +7,9 @@ export default defineConfig(
     ignores: ["dist/**"],
   },
   baseConfig,
+  {
+    rules: {
+      "@typescript-eslint/no-unsafe-return": "off", // Honoでは例外的にオフで。
+    },
+  },
 );

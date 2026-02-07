@@ -3,7 +3,7 @@ import { env } from "cloudflare:workers";
 
 import { initAuth } from "@acme/auth";
 
-import { dbClient } from "~/lib/db";
+import { dbClient } from "~/lib/dbClient";
 
 export const auth = initAuth({
   db: dbClient(),

@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Route as RouteIcon,
@@ -8,9 +9,29 @@ import {
   Zap,
 } from "lucide-react";
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute("/")({
+  loader: ({ context }) => {
+    void context.queryClient.prefetchQuery({
+      queryKey: ["hello"],
+      queryFn: async () => {
+        const res = await context.api.api.main.$get();
+        return res.text();
+      },
+    });
+  },
+  component: App,
+});
 
 function App() {
+  const { api } = Route.useRouteContext();
+  const { data: hello } = useSuspenseQuery({
+    queryKey: ["hello"],
+    queryFn: async () => {
+      const res = await api.api.main.$get();
+      return res.text();
+    },
+  });
+
   const features = [
     {
       icon: <Zap className="h-12 w-12 text-cyan-400" />,
@@ -62,7 +83,7 @@ function App() {
               className="h-24 w-24 md:h-32 md:w-32"
             />
             <h1 className="text-6xl font-black [letter-spacing:-0.08em] text-white md:text-7xl">
-              <span className="text-gray-300">ここ</span>{" "}
+              <span className="text-gray-300">ここ{hello}</span>{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 START
               </span>
