@@ -9,28 +9,18 @@ import {
   Zap,
 } from "lucide-react";
 
+import { helloQuery } from "~/fetch/hello";
+
 export const Route = createFileRoute("/")({
   loader: ({ context }) => {
-    void context.queryClient.prefetchQuery({
-      queryKey: ["hello"],
-      queryFn: async () => {
-        const res = await context.api.api.main.$get();
-        return res.text();
-      },
-    });
+    void context.queryClient.prefetchQuery(helloQuery(context.api));
   },
   component: App,
 });
 
 function App() {
   const { api } = Route.useRouteContext();
-  const { data: hello } = useSuspenseQuery({
-    queryKey: ["hello"],
-    queryFn: async () => {
-      const res = await api.api.main.$get();
-      return res.text();
-    },
-  });
+  const { data: hello } = useSuspenseQuery(helloQuery(api));
 
   const features = [
     {

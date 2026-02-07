@@ -5,7 +5,8 @@ import { createApiClient } from "@acme/api/client";
 
 export const makeApiClient = createIsomorphicFn()
   .server(() =>
-    createApiClient("http://localhost", {
+    // URLは何でも良い
+    createApiClient("http://example.com", {
       fetch: (input: RequestInfo | URL, init?: RequestInit) =>
         app.fetch(new Request(input, init)) as Promise<Response>,
     }),
