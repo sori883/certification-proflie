@@ -7,3 +7,15 @@ node_modules/
 .serena/cache
 *.local.json
 .env
+.dev.vars
+.cache
+.turbo
+dist
+migrations
+.wrangler
+worker-configuration.d.ts
+
+# tanstack
+.tanstack
+
+docs

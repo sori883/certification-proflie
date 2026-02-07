@@ -14,6 +14,10 @@
         "../certification-proflie"
       ],
       "env": {}
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://context7.liam.sh/mcp"
     }
   }
 }
